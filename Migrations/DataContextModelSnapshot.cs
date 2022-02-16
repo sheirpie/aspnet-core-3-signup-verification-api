@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApi.Helpers;
 
@@ -14,102 +15,92 @@ namespace WebApi.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.5");
+                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("WebApi.Entities.Account", b =>
+            modelBuilder.Entity("WebApi.Entities.Lead", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("AcceptTerms")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("CampaignCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creations")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Device")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HouseNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Language")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("LocalNumber")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("PasswordReset")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("OfferType")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ResetToken")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Partner")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("ResetTokenExpires")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PostCode")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Product")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VerificationToken")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Quantity")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Verified")
-                        .HasColumnType("TEXT");
+                    b.Property<string>("Referer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Region")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Source")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Accounts");
-                });
-
-            modelBuilder.Entity("WebApi.Entities.Account", b =>
-                {
-                    b.OwnsMany("WebApi.Entities.RefreshToken", "RefreshTokens", b1 =>
-                        {
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<int>("AccountId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<DateTime>("Created")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("CreatedByIp")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<DateTime>("Expires")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("ReplacedByToken")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<DateTime?>("Revoked")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("RevokedByIp")
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Token")
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("AccountId");
-
-                            b1.ToTable("RefreshToken");
-
-                            b1.WithOwner("Account")
-                                .HasForeignKey("AccountId");
-                        });
+                    b.ToTable("Leads");
                 });
 #pragma warning restore 612, 618
         }

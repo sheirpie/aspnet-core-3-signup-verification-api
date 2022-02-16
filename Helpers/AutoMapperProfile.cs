@@ -1,6 +1,6 @@
 using AutoMapper;
 using WebApi.Entities;
-using WebApi.Models.Accounts;
+using WebApi.Models.Leads;
 
 namespace WebApi.Helpers
 {
@@ -9,15 +9,11 @@ namespace WebApi.Helpers
         // mappings between model and entity objects
         public AutoMapperProfile()
         {
-            CreateMap<Account, AccountResponse>();
+            CreateMap<Lead, LeadResponse>();
 
-            CreateMap<Account, AuthenticateResponse>();
+            CreateMap<CreateRequest, Lead>();
 
-            CreateMap<RegisterRequest, Account>();
-
-            CreateMap<CreateRequest, Account>();
-
-            CreateMap<UpdateRequest, Account>()
+            CreateMap<UpdateRequest, Lead>()
                 .ForAllMembers(x => x.Condition(
                     (src, dest, prop) =>
                     {
@@ -25,8 +21,8 @@ namespace WebApi.Helpers
                         if (prop == null) return false;
                         if (prop.GetType() == typeof(string) && string.IsNullOrEmpty((string)prop)) return false;
 
-                        // ignore null role
-                        if (x.DestinationMember.Name == "Role" && src.Role == null) return false;
+                     /*   // ignore null role
+                        if (x.DestinationMember.Name == "Role" && src.Role == null) return false;*/
 
                         return true;
                     }

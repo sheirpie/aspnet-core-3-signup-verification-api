@@ -29,12 +29,8 @@ namespace WebApi
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen();
 
-            // configure strongly typed settings object
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
             // configure DI for application services
-            services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ILeadService, LeadService>();
         }
 
         // configure the HTTP request pipeline
@@ -58,9 +54,6 @@ namespace WebApi
 
             // global error handler
             app.UseMiddleware<ErrorHandlerMiddleware>();
-
-            // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(x => x.MapControllers());
         }
